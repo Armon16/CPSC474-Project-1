@@ -8,7 +8,7 @@ using namespace std;
 void pushToClock(vector<string> p, vector<int> &cv, int msgs[]);
 
 int main() {
-	
+
 	//test case
 	vector<string> p0, p1, p2;
 	vector<int> c0, c1, c2;
@@ -45,6 +45,21 @@ int main() {
 		pushToClock(p2, c2, sMessages);
 	}
 
+	for (int x : c0)
+	{
+		cout << x << " ";
+	}
+	cout << "\n";
+	for (int x : c1)
+	{
+		cout << x << " ";
+	}
+	cout << "\n";
+	for (int x : c2)
+	{
+		cout << x << " ";
+	}
+	cout << "\n";
 	system("pause");
 	return 0;
 }
@@ -67,7 +82,7 @@ void pushToClock(vector<string> p, vector<int> &cv, int msgs[])
 			cv.push_back(clockCount);
 			clockCount++;
 		}
-		
+
 		//check if clock value is saved for indexed send message
 		//if not, break the loop
 		else if (c == 'r')
