@@ -49,7 +49,7 @@ int main() {
 	}
 
 	pushClock(pMatrix, cMatrix, sMessages, rCount);
-	cout << "FUCKING SUCCESS FINALLY" << endl;
+	cout << "SUCCESS FINALLY" << endl;
 
 	for (int i = 0; i < n; i++)
 	{
