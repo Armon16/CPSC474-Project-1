@@ -65,7 +65,8 @@ int main() {
 		if (!errorArr[i])
 		{
 			cout << "Invalid matrix\n";
-			system("pause");
+			cout << "Press enter to continue";
+			cin.ignore();
 			return 1;
 		}
 	}
