@@ -11,13 +11,9 @@ const extern int m = 4; //no more than 25
 void pushClock(string p[n][m], int c[n][m], int msgs[], int r);
 
 int main() {
-
 	//test case
-	vector<string> p0, p1, p2;
-	vector<int> c0, c1, c2;
-
-	//
 	string pMatrix[n][m] = { { "a", "s1", "r3", "b" }, { "c", "r2", "s3", "NULL" }, { "r1", "d", "s2", "e" } };
+	//will hold the LC values
 	int cMatrix[n][m];
 
 	//initialize cMatrix to 0
@@ -39,6 +35,7 @@ int main() {
 		sMessages[i] = 0;
 	}
 
+	//counts the number of receive events found in the process matrix
 	for (int a = 0; a < n; a++)
 	{
 		for (int b = 0; b < m; b++)
@@ -49,8 +46,7 @@ int main() {
 	}
 
 	pushClock(pMatrix, cMatrix, sMessages, rCount);
-	cout << "SUCCESS FINALLY" << endl;
-
+	
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
@@ -67,6 +63,7 @@ int main() {
 
 void pushClock(string p[n][m], int c[n][m], int msgs[], int r)
 {
+	//cycle through the loops for the number of receive events found -- 3 events
 	for (int abc = 0; abc < r; abc++)
 	{
 		//loops through the processes
@@ -111,7 +108,6 @@ void pushClock(string p[n][m], int c[n][m], int msgs[], int r)
 					}
 					else
 					{
-						
 						//find the correlated send message in array and increment
 						clockCount = msgs[stoi(p[i][j])] + 1;
 						c[i][j] = clockCount;
@@ -132,13 +128,12 @@ void pushClock(string p[n][m], int c[n][m], int msgs[], int r)
 
 					if (temp == "null")
 					{
-						
+						c[i][j] = 0;
 						//move to next process
 						j = m;
 					}
 					else
-					{
-						
+					{	
 						c[i][j] = clockCount;
 						clockCount++;
 					}
@@ -147,7 +142,6 @@ void pushClock(string p[n][m], int c[n][m], int msgs[], int r)
 				//continue loop if internal event
 				else
 				{
-					
 					c[i][j] = clockCount;
 					clockCount++;
 				}
