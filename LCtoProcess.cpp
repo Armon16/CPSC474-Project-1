@@ -22,7 +22,7 @@ int main() {
 	//test case 2 -- valid
 	int cMatrix1[n][m] = { { 1, 2, 8, 9 },{ 1, 6, 7, 0 },{ 2, 3, 4, 5 } };
 	
-	//test case 3 -- valid
+	//test case 3 -- invalid
 	int cMatrix2[n][m] = { { 1, 2, 8, 9 },{ 1, 6, 7, 0 },{ 2, 4, 5, 6 } };
 	string pMatrix[n][m]; //will hold process values
 
