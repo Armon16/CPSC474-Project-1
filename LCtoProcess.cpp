@@ -14,11 +14,9 @@ int foundRecEvent(int c[n][m], string p[n][m], int i, int j, int &hC, int &sC);
 void changeInternals(string p[n][m]);
 
 int main() {
-
-
-	//
+	//test case
 	int cMatrix[n][m] = { { 1, 2, 8, 9 },{ 1, 6, 7, 0 },{ 2, 3, 4, 5 } };
-	string pMatrix[n][m];
+	string pMatrix[n][m]; //will hold process values
 	int sCount, rCount = 0;
 	int highest = 0;
 
@@ -30,7 +28,7 @@ int main() {
 		errorArr[i] = false;
 	}
 
-	//for every c value found, store true in errorArray
+	//for every clock value found, store true in errorArray
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
@@ -73,7 +71,6 @@ int main() {
 	
 	pushProcess(pMatrix, cMatrix, highest);
 	changeInternals(pMatrix);
-	cout << "SUCCESS FINALLY" << endl;
 
 	for (int i = 0; i < n; i++)
 	{
@@ -84,25 +81,23 @@ int main() {
 		cout << endl;
 	}
 
-	cout << "Press enter to continue: ";
-	cin.ignore();
 	return 0;
 }
 
 void pushProcess(string p[n][m], int c[n][m], int highest)
 
 {
-	string internalEvent = "internal";
-	int highC = 0;
-	int sCount = 0;
-	int rCount = 0;
+	string internalEvent = "internal"; //store word for internal events
+	int highC = 0; //highest clock value found so far
+	int sCount = 0; //number of send messages found
+	int rCount = 0; //number of receive messages found
 	int outerIndex = 1;
-	bool exitAll = false;
+	bool exitAll = false; //boolean to exit all loops
 
+	//loop through for as many receive events that are found
 	for (int x = 0; x < outerIndex && !exitAll; x++)
 	{
 		rCount = 0;
-		//sCount = 0;
 
 		//loop for each process
 		for (int i = 0; i < n && !exitAll; i++)
@@ -113,6 +108,8 @@ void pushProcess(string p[n][m], int c[n][m], int highest)
 				//check if first event in a process
 				if (j == 0 && c[i][j] == 1)
 				{
+					//if the process is "null", overwrite
+					//if it already stores a value, do not overwrite
 					if (p[i][j] == "null")
 					{
 						//mark as internal event
@@ -122,8 +119,10 @@ void pushProcess(string p[n][m], int c[n][m], int highest)
 					if (c[i][j] > highC)
 						highC = c[i][j];
 				}
+				//if the first event is a receive event
 				else if (j == 0 && c[i][j] != 1)
 				{
+					//if the event is "null", overwrite with receive
 					//if the event is already filled with a value, ignore
 					if (p[i][j] == "null")
 					{
@@ -150,32 +149,34 @@ void pushProcess(string p[n][m], int c[n][m], int highest)
 				//hit a receive event
 				else
 				{					
-					rCount++; // may not even need it
+					rCount++; 
 					j = foundRecEvent(c, p, i, j, highC, sCount);
 				}
 
 				
-				//if highest number is found, exit all loops
+				//if we've encountered the highest clock count, exit all loops
+				//so that we don't overwrite events
 				if (highest == highC) //c[i][j]
 				{
 					exitAll = true;
 				}
 			}
 		}
-
+		
+		//change the outmost forloop index for each receive event found
 		outerIndex = ++rCount;
 		
 	}
 }
 
+//reassign internal events as send messages and receive messages
 int foundRecEvent(int c[n][m], string p[n][m], int i, int j, int &hC, int &sC)
 {
 	stringstream ss;
 	//if we have found a matching send event
 	if (hC >= c[i][j] - 1)
 	{
-		//mark that we have found a receive and send event
-		//rCount++;
+		//mark that we have found a send event
 		sC++;
 
 		//find the send process in the clock matrix
@@ -199,17 +200,17 @@ int foundRecEvent(int c[n][m], string p[n][m], int i, int j, int &hC, int &sC)
 		}
 
 		//add r to process matrix
-		//ss << sC;
 		p[i][j] = "r" + ss.str(); // process = r + send index
-		ss.clear();
+		ss.clear(); //clear the string buffer for next time
 
+		//adjust the highest clock count
 		if (c[i][j] > hC)
 			hC = c[i][j];
 	}
 	//no matching send found
 	else
 	{
-		j = m;
+		j = m; // exit loop
 	}
 
 	return j;
@@ -220,6 +221,8 @@ void changeInternals(string p[n][m])
 {
 	char ch = 'a';
 
+	//loop through matrix and reassign values to remaining
+	//internal events
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
