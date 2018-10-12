@@ -1,3 +1,10 @@
+a s1 r3 b 
+c r2 s3 null 
+r1 d s2 e 
+
 s1 a r3 b 
 c r2 s3 null 
 r1 d e s2 
+
+Invalid matrix
+Press enter to continue: 

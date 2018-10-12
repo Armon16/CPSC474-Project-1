@@ -31,7 +31,8 @@ int main() {
 	testCase(cMatrix2, pMatrix);
 	
 
-	system("pause");
+	cout << "Press enter to continue: ";
+	cin.ignore();
 	return 0;
 }
 

@@ -33,6 +33,7 @@ processToLC.cpp: //takes events as input, outputs calculated logical clock valeu
 
 processToLC.out: 
 	contains terminal output of the program using default example input
+	output was obtained using bash redirection operator >
 
 LCtoProcess.cpp: //takes clock values as input, validates them, and outputs the original events
 	initalize inputted matrix of clock values
@@ -80,4 +81,6 @@ LCtoProcess.cpp: //takes clock values as input, validates them, and outputs the 
 		call changeInternals() to mark all leftover internal/send events as
 		internal and assign letters in order starting with 'a'
 
-
+LCtoProcess.out: 
+	contains terminal output of the program using default example input
+	output was obtained using bash redirection operator >
