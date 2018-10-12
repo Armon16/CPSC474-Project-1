@@ -72,7 +72,7 @@ int main() {
 	
 	pushProcess(pMatrix, cMatrix, highest);
 	changeInternals(pMatrix);
-	cout << "FUCKING SUCCESS FINALLY" << endl;
+	cout << "SUCCESS FINALLY" << endl;
 
 	for (int i = 0; i < n; i++)
 	{
@@ -83,7 +83,8 @@ int main() {
 		cout << endl;
 	}
 
-	system("pause");
+	cout << "Press enter to continue: ";
+	cin.ignore();
 	return 0;
 }
 

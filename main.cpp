@@ -59,8 +59,8 @@ int main() {
 		}
 		cout << endl;
 	}
-
-	system("pause");
+	cout << "Press enter to continue: ";
+	cin.ignore();
 	return 0;
 }
 
